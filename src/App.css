@@ -1,3 +1,62 @@
+@font-face {
+  font-family: 'inter';
+  src: local('inter'), url(./fonts/Inter-VariableFont_slnt,wght.ttf) format('truetype');
+}
+
 .App {
   text-align: center;
+  font-family: inter,serif;
+  /* background-color: #AA9CF0; */
+  background: linear-gradient(118.29deg, #CFC6FF -1.86%, #AA9CF0 55.59%, #DCD7F7 102.19%);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 40px;
+  color: #FFF;
+}
+
+.titleComponent {
+  padding-top: 80px;
+  margin-bottom: 53px;
+  display: flex;
+  flex-direction: column;
+}
+
+.descr {
+  color: #8458FF;
+  font-size: 14px;
+}
+
+.backgroundSlider {
+  /* position: absolute; */
+  height: 30px;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(18px);
+  border-radius: 110px;
+  margin-top: 10px;
+}
+
+.minTemp {
+  margin-left: 0px;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.temp {
+  /* margin-left: -200px; */
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: #8458FF;
+  margin-left: 165px;
+  font-weight: 700;
+  font-size: 16px;
 }
