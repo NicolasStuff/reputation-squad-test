@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 // import Counter from './components/Counter';
 import Weather from "./components/Weather";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <text className="descr">NEXT 7 DAYS</text>
       </div>
       <Weather />
+      <Footer/>
     </div>
   );
 }

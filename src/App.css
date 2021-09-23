@@ -118,3 +118,10 @@
   color: #8458FF;
   font-size: 16px;
 }
+
+.footer{
+  margin-top: 1rem;
+  padding: 1rem;
+  bottom: 0;
+  left: 0;
+}
