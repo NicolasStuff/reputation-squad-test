@@ -3,16 +3,18 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-input-slider";
 
 function Weather() {
-  const [value, setValue] = useState("");
+  //data filtered in UseEffect
   const [weatherDataList, setWeatherDataList] = useState([]);
+
+  //value of minimal weather temp updated in Slider
   const [state, setState] = useState({ x: 11 });
 
   useEffect(() => {
+      //fetching data
     fetch(
       `http://api.openweathermap.org/data/2.5/forecast/daily?q=paris&cnt=7&appid=${process.env.REACT_APP_API_KEY_WEATHER}&units=metric`
     )
       .then(function (res) {
-        // console.log(res)
         return res.json();
       })
       .then(function (data) {
@@ -23,22 +25,19 @@ function Weather() {
           day: "numeric",
         };
 
-        for (var i = 0; i < data.list.length; i++) {
+        //conversion of time in millisecond to english readable date.
+        for (let i = 0; i < data.list.length; i++) {
           data.list[i].date = new Date(
             data.list[i].dt * 1000
           ).toLocaleDateString("en-EN", options);
         }
-        // console.log('data', data);
-
+        //cloning data to clone
         let clone = { ...data };
 
-        // console.log('clone', clone);
-
+        //flitering data to match with the value of the slider
         clone.list = clone.list.filter((x) => x.temp.min >= state.x);
 
-        console.log("clone.list", clone.list);
-
-        // setWeatherData(clone);
+        //updating state
         setWeatherDataList(clone.list);
       })
       .catch(function (err) {
@@ -46,40 +45,45 @@ function Weather() {
       });
   }, [state]);
 
-  //   console.log('weatherData', weatherData)
-  console.log("weatherDataList", weatherDataList);
-
-  console.log("state", state);
-
-  //  const onFilterTempMin = (temp) => {
-  //     console.log(temp)
-  //  }
-
   const displayWeather = () => {
+    //testing if the array is empty
     if (weatherDataList.length > 0) {
       console.log("je suis vrai");
       return (
         <div>
+        {/* mapping to display multuple cards */}
           {weatherDataList.map((i) => {
             return (
               <div className="dayWeatherBackground">
                 <img
+                // fetching the openweathermap image weather dynamically
                   src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`}
                   className="weatherImg"
                 ></img>
                 <div className="dateOfWeather">
+                    {/* cut the string to match the day */}
                   <text>{i.date.split(" ")[0].slice(0, 4)}.</text>
-                  <text className="bigDate">{i.date.split(" ")[2].slice(0, 2)}</text>
+                    {/* cut the string to match the day of the month */}
+                  <text className="bigDate">
+                    {i.date.split(" ")[2].slice(0, 2)}
+                  </text>
+                  {/* cut the string to match the month */}
                   <text>{i.date.split(" ")[1]}</text>
                 </div>
                 <div>
                   <div className="minAndMaxTemps">
                     <text>min temp</text>
-                    <text className= 'tempData'>{Math.round(i.temp.min)} °C</text>
+                    <text className="tempData">
+                        {/* rounding data to entire */}
+                      {Math.round(i.temp.min)} °C
+                    </text>
                   </div>
                   <div className="minAndMaxTemps">
                     <text>max temp </text>
-                    <text className= 'tempData2'>{Math.round(i.temp.max)} °C</text>
+                    <text className="tempData2">
+                        {/* rounding data to entire */}
+                      {Math.round(i.temp.max)} °C
+                    </text>
                   </div>
                 </div>
               </div>
@@ -88,15 +92,18 @@ function Weather() {
         </div>
       );
     } else {
-      console.log("je suis faux");
+    //   display error of the array if empty
       return (
-        <div className='descr-err'>
-          <text>Please, select a lower temperature than {state.x} °C, thank you. </text>
+        <div className="descr-err">
+          <text>
+            Please, select a lower temperature than {state.x} °C, thank you.{" "}
+          </text>
         </div>
       );
     }
   };
 
+  // MAIN RETURN
   return (
     <>
       <div>
@@ -130,6 +137,8 @@ function Weather() {
           }}
         />
       </div>
+
+      {/* DISPLAY OF THE WEATHER CARDS */}
       {displayWeather()}
     </>
   );

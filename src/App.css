@@ -6,7 +6,6 @@
 .App {
   text-align: center;
   font-family: inter,serif;
-  /* background-color: #AA9CF0; */
   background: linear-gradient(118.29deg, #CFC6FF -1.86%, #AA9CF0 55.59%, #DCD7F7 102.19%);
   min-height: 100vh;
 }
