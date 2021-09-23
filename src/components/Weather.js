@@ -1,10 +1,11 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
+import Slider from "react-input-slider";
 
 function Weather() {
   const [value, setValue] = useState("");
-  const [weatherData, setWeatherData] = useState();
   const [weatherDataList, setWeatherDataList] = useState([]);
+  const [state, setState] = useState({ x: 11 });
 
   useEffect(() => {
     fetch(
@@ -33,24 +34,30 @@ function Weather() {
 
         // console.log('clone', clone);
 
-        clone.list = clone.list.filter((x) => x.temp.min >= 14);
 
-        // console.log('clone2', clone);
+        clone.list = clone.list.filter((x) => x.temp.min >= state.x);
 
-        // console.log('result', result)
+        console.log('clone.list',clone.list)
 
-        // console.log(newDataWeather.toLocaleDateString("fr-FR", options));
 
-        setWeatherData(clone);
+        // setWeatherData(clone);
         setWeatherDataList(clone.list);
+
+
       })
       .catch(function (err) {
         console.log("error :", err);
       });
-  }, [value]);
+  }, [state]);
 
   //   console.log('weatherData', weatherData)
   console.log("weatherDataList", weatherDataList);
+
+  console.log('state', state)
+
+//  const onFilterTempMin = (temp) => {
+//     console.log(temp)
+//  }
 
   const displayWeather = () => {
     if (weatherDataList.length > 0) {
@@ -63,7 +70,9 @@ function Weather() {
                 <li>Date : {i.date}</li>
                 <li>Temp maximum : {i.temp.max}</li>
                 <li>Temp minimun: {i.temp.min}</li>
-                <img src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`}></img>
+                <img
+                  src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`}
+                ></img>
                 {/* <li>Icon placeholder: {weatherData.list[i].weather.icon}</li> */}
               </ul>
             );
@@ -80,7 +89,19 @@ function Weather() {
     }
   };
 
-  return <>{displayWeather()}</>;
+  return (
+    <>
+      <Slider
+        axis="x"
+        x={state.x}
+        xmax={60}
+        xmin={-20}
+        xstep={1}
+        onChange={({ x }) => setState(state => ({ ...state, x }))}
+      />
+      {displayWeather()}
+    </>
+  );
 }
 
 export default Weather;
