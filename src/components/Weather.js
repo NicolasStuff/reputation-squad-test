@@ -59,18 +59,31 @@ function Weather() {
     if (weatherDataList.length > 0) {
       console.log("je suis vrai");
       return (
-        <div className="App">
+        <div>
           {weatherDataList.map((i) => {
             return (
-              <ul>
-                <li>Date : {i.date}</li>
-                <li>Temp maximum : {i.temp.max}</li>
-                <li>Temp minimun: {i.temp.min}</li>
+              <div className="dayWeatherBackground">
                 <img
                   src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`}
+                  className="weatherImg"
                 ></img>
+                <div className="dateOfWeather">
+                  <text>{i.date.split(" ")[0].slice(0, 4)}.</text>
+                  <text className="bigDate">{i.date.split(" ")[1]}</text>
+                  <text>{i.date.split(" ")[2]}</text>
+                </div>
+                <div>
+                  <div className="minAndMaxTemps">
+                    <text>min temp</text>
+                    <text className= 'tempData'>{i.temp.min} °C</text>
+                  </div>
+                  <div className="minAndMaxTemps">
+                    <text>max temp </text>
+                    <text className= 'tempData'>{i.temp.max} °C</text>
+                  </div>
+                </div>
                 {/* <li>Icon placeholder: {weatherData.list[i].weather.icon}</li> */}
-              </ul>
+              </div>
             );
           })}
         </div>
@@ -87,7 +100,7 @@ function Weather() {
 
   return (
     <>
-      <div className='dataTemps'>
+      <div>
         <text className="minTemp">min temp</text>
         <text className="temp">{state.x} °C</text>
       </div>
