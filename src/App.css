@@ -8,6 +8,7 @@
   font-family: inter,serif;
   /* background-color: #AA9CF0; */
   background: linear-gradient(118.29deg, #CFC6FF -1.86%, #AA9CF0 55.59%, #DCD7F7 102.19%);
+  min-height: 100vh;
 }
 
 .title {
@@ -26,6 +27,11 @@
 .descr {
   color: #8458FF;
   font-size: 14px;
+}
+.descr-err {
+  color: #8458FF;
+  font-size: 14px;
+  padding-top: 30px;
 }
 
 .backgroundSlider {
@@ -100,11 +106,16 @@
   text-transform: uppercase;
   padding-left: 90px;
   font-size: 10px;
+  align-items: center;
 }
 
 .tempData {
   padding-left: 50px;
   color: #8458FF;
   font-size: 16px;
-
+}
+.tempData2 {
+  padding-left: 45px;
+  color: #8458FF;
+  font-size: 16px;
 }

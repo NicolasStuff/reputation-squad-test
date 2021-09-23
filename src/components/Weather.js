@@ -26,7 +26,7 @@ function Weather() {
         for (var i = 0; i < data.list.length; i++) {
           data.list[i].date = new Date(
             data.list[i].dt * 1000
-          ).toLocaleDateString("fr-FR", options);
+          ).toLocaleDateString("en-EN", options);
         }
         // console.log('data', data);
 
@@ -69,20 +69,19 @@ function Weather() {
                 ></img>
                 <div className="dateOfWeather">
                   <text>{i.date.split(" ")[0].slice(0, 4)}.</text>
-                  <text className="bigDate">{i.date.split(" ")[1]}</text>
-                  <text>{i.date.split(" ")[2]}</text>
+                  <text className="bigDate">{i.date.split(" ")[2].slice(0, 2)}</text>
+                  <text>{i.date.split(" ")[1]}</text>
                 </div>
                 <div>
                   <div className="minAndMaxTemps">
                     <text>min temp</text>
-                    <text className= 'tempData'>{i.temp.min} °C</text>
+                    <text className= 'tempData'>{Math.round(i.temp.min)} °C</text>
                   </div>
                   <div className="minAndMaxTemps">
                     <text>max temp </text>
-                    <text className= 'tempData'>{i.temp.max} °C</text>
+                    <text className= 'tempData2'>{Math.round(i.temp.max)} °C</text>
                   </div>
                 </div>
-                {/* <li>Icon placeholder: {weatherData.list[i].weather.icon}</li> */}
               </div>
             );
           })}
@@ -91,9 +90,9 @@ function Weather() {
     } else {
       console.log("je suis faux");
       return (
-        <ul>
-          <li>no data yet</li>
-        </ul>
+        <div className='descr-err'>
+          <text>Please, select a lower temperature than {state.x} °C, thank you. </text>
+        </div>
       );
     }
   };
